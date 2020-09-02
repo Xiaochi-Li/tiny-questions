@@ -6,9 +6,11 @@
   "author": "xiaochi li <sean.li@comparethemarket.com.au>",
   "license": "MIT",
   "scripts": {
-    "format": "yarn prettier --write ./ansers/*.js"
+    "format": "yarn prettier --write ./ansers/*.js & "
   },
   "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
     "prettier": "2.1.1"
   }
 }

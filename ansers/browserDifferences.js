@@ -41,7 +41,7 @@ function getGrandparent(node) {
 }
 
 /**
- * Give a new definition of getGrandparentName that uses your definition of getGrandparent from (2)
+ * Answer to question 3: Give a new definition of getGrandparentName that uses your definition of getGrandparent from (2)
  * -------------------------------------------------------------------------------------------------
  * return
  * @param node
@@ -49,14 +49,13 @@ function getGrandparent(node) {
  */
 function getGrandparentNameVersionTwo(node) {
   const grandparent = getGrandparent(node);
-  // this will work on Browser X Y and Z. because null and undefined both coerce to false.
   if (!grandparent) return "";
   // Assume if a node exist, it will always have a valid alphabetic string name.
   return grandparent.nodeName;
 }
 
 /**
- * Write a function getGreatGrandparent(node) that given a node, returns the node that is the great
+ * Answer to question 4: Write a function getGreatGrandparent(node) that given a node, returns the node that is the great
  * grandparent of node (e.g. getGreatGrandparent(eclair) === apple). Must work on all browsers
  * -------------------------------------------------------------------------------------------------
  * A function that returns the great-grandparent node of a given node. If the given node doesn't have a
@@ -67,6 +66,45 @@ function getGrandparentNameVersionTwo(node) {
  */
 function getGreatGrandparent(node) {
   const grandparent = getGrandparent(node);
+  // this will work on Browser X Y and Z. because null and undefined both coerce to false.
   if (!grandparent) return grandparent;
   return grandparent.parentNode;
 }
+
+/**
+ * Answer to question 5:
+ * What are your thoughts about your implementations above?
+ * If you knew you had to write all of these functions at the start, would you have changed your approach?
+ * If so, why?
+ * How well does your approach scale to going even further up the tree?
+ * -------------------------------------------------------------------------------------------------
+ * 1. I feel most of my implementations are OK. I reused getGrandparent() in the 4th function, getGreatGrandparent,
+ * Doing so will save me from implementing the logic checking if a node has a parent. However this creates a layer
+ * of dependency. Unit test is needed to ensure no changes on getGrandparent() would break getGreatGrandparent()
+ * 2. If I knew I have to write all of these functions at the start I would't change my approach.
+ * 3. The above approach is not ideal as the further up the tree, functions are needed for each generation of grand parent.
+ * It is better to solve this problem recursively.
+ */
+
+/**
+ * 1. get the ancestor node of a given node further up the tree of a given generation.
+ * 2. If the given node only have 2 generation up the tree but 4 is given at calling,
+ * the function will return null for Browser X and Y, undefined for browser Z.
+ * 3. return null if 0 is given as generation param
+ * @param node {Node}
+ * @param  generation {number} should be greater than 0, integer
+ * @return { Node | null | undefined }
+ */
+function getAncestor(node, generation){
+  const parent = node.parentNode;
+  if (generation<1) return null;
+  if (generation == 1) {
+    return parent;
+  } else {
+    // this will work on Browser X Y and Z. because null and undefined both coerce to false.
+    if (!parent) return parent;
+    return getAncestor(parent, generation -1)
+  }
+}
+
+getAncestor(node,3);

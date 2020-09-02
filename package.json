@@ -1,0 +1,14 @@
+{
+  "name": "tiny-questions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Xiaochi-Li/tiny-questions.git",
+  "author": "xiaochi li <sean.li@comparethemarket.com.au>",
+  "license": "MIT",
+  "scripts": {
+    "format": "yarn prettier --write ./ansers/*.js"
+  },
+  "devDependencies": {
+    "prettier": "2.1.1"
+  }
+}

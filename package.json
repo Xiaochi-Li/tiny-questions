@@ -6,7 +6,7 @@
   "author": "xiaochi li <sean.li@comparethemarket.com.au>",
   "license": "MIT",
   "scripts": {
-    "format": "yarn prettier --write ./ansers/*.js & "
+    "format": "yarn prettier --write ./ansers/*.js & eslint ./ansers/*.js --fix "
   },
   "devDependencies": {
     "eslint": "^7.8.1",

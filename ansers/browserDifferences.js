@@ -1,9 +1,10 @@
-// function is used for all answers because arrow functions is not supported on older browser
-// without babel
+// mainly using functions declaration for all answers is because I'm not sure how these functions will be called.
+// declared functions are hoisted thus its little bit safer.
+// node
 /**
  * Answer to question 1: Write a function getGrandparentName(node) that, given a node, returns
  * the node name of the grandparent of that node. Must work on all browsers
- * -------------------------------------------------------------------------------------------------
+ *
  * A function returns the name of the grandparent node of a given node.
  * @param {Node} node
  * @return {string}
@@ -22,10 +23,12 @@ function getGrandparentName(node) {
   return parent.parentNode.nodeName;
 }
 
+/*--------------------------------------------------------------------------------------------------*/
+
 /**
  * Answer to question 2: Write a function getGrandparent(node) that, given a node, returns
  * the grandparent of that node. Must work on all browsers.
- * -------------------------------------------------------------------------------------------------
+ *
  * A function that returns the grandparent node of a given node. If the given node doesn't have a
  * parentNode or grandparent node, the function will return null for Browser X and Y, undefined for
  * browser Z
@@ -40,9 +43,11 @@ function getGrandparent(node) {
   return parent.parentNode;
 }
 
+/*--------------------------------------------------------------------------------------------------*/
+
 /**
  * Answer to question 3: Give a new definition of getGrandparentName that uses your definition of getGrandparent from (2)
- * -------------------------------------------------------------------------------------------------
+ *
  * return
  * @param node
  * @return {string}
@@ -54,10 +59,12 @@ function getGrandparentNameVersionTwo(node) {
   return grandparent.nodeName;
 }
 
+/*--------------------------------------------------------------------------------------------------*/
+
 /**
  * Answer to question 4: Write a function getGreatGrandparent(node) that given a node, returns the node that is the great
  * grandparent of node (e.g. getGreatGrandparent(eclair) === apple). Must work on all browsers
- * -------------------------------------------------------------------------------------------------
+ *
  * A function that returns the great-grandparent node of a given node. If the given node doesn't have a
  * parent node, grandparent node or great-grandparent node, the function will return null for Browser X and Y, undefined for
  * browser Z
@@ -71,19 +78,21 @@ function getGreatGrandparent(node) {
   return grandparent.parentNode;
 }
 
+/*--------------------------------------------------------------------------------------------------*/
+
 /**
  * Answer to question 5:
  * What are your thoughts about your implementations above?
  * If you knew you had to write all of these functions at the start, would you have changed your approach?
  * If so, why?
  * How well does your approach scale to going even further up the tree?
- * -------------------------------------------------------------------------------------------------
+ *
  * 1. I feel most of my implementations are OK. I reused getGrandparent() in the 4th function, getGreatGrandparent,
  * Doing so will save me from implementing the logic checking if a node has a parent. However this creates a layer
  * of dependency. Unit test is needed to ensure no changes on getGrandparent() would break getGreatGrandparent()
  * 2. If I knew I have to write all of these functions at the start I would't change my approach.
  * 3. The above approach is not ideal as the further up the tree, functions are needed for each generation of grand parent.
- * It is better to solve this problem recursively.
+ * It is better to solve this problem recursively. See implementation below.
  */
 
 /**
@@ -95,16 +104,14 @@ function getGreatGrandparent(node) {
  * @param  generation {number} should be greater than 0, integer
  * @return { Node | null | undefined }
  */
-function getAncestor(node, generation){
+function getAncestor(node, generation) {
   const parent = node.parentNode;
-  if (generation<1) return null;
+  if (generation < 1) return null;
   if (generation == 1) {
     return parent;
   } else {
     // this will work on Browser X Y and Z. because null and undefined both coerce to false.
     if (!parent) return parent;
-    return getAncestor(parent, generation -1)
+    return getAncestor(parent, generation - 1);
   }
 }
-
-getAncestor(node,3);

@@ -1,6 +1,5 @@
 // mainly using functions declaration for all answers is because I'm not sure how these functions will be called.
 // declared functions are hoisted thus its little bit safer.
-// node
 /**
  * Answer to question 1: Write a function getGrandparentName(node) that, given a node, returns
  * the node name of the grandparent of that node. Must work on all browsers
